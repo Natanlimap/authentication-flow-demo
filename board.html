@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadro de Tarefas</title>
+<style>
+  body {font-family: Arial, sans-serif; margin: 20px; background: #f6f6f6;}
+  h1 {text-align: center; color: #6a0dad;}
+  .board {display: flex; justify-content: space-between; gap: 20px;}
+  .column {background: #fff; border-radius: 4px; flex: 1; padding: 10px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+  .column h2 {text-align: center; color: #6a0dad;}
+  .task {border: 1px solid #ddd; border-radius: 4px; padding: 8px; margin-bottom: 10px; background: #fafafa;}
+  .metrics {font-size: 0.85em; color: #555; margin-top: 4px;}
+</style>
+</head>
+<body>
+<h1>MVP de Gerenciamento de Tarefas</h1>
+<div class="board">
+  <div class="column">
+    <h2>A Fazer</h2>
+    <div class="task" data-start="2024-06-01T09:00" data-end="2024-06-01T11:00">
+      <strong>Configurar login</strong>
+      <div class="metrics"></div>
+    </div>
+    <div class="task" data-start="2024-06-02T10:00" data-end="2024-06-02T12:30">
+      <strong>Criar interface</strong>
+      <div class="metrics"></div>
+    </div>
+  </div>
+  <div class="column">
+    <h2>Fazendo</h2>
+    <div class="task" data-start="2024-06-03T14:00" data-end="2024-06-03T17:30">
+      <strong>Implementar arrastar e soltar</strong>
+      <div class="metrics"></div>
+    </div>
+  </div>
+  <div class="column">
+    <h2>Concluído</h2>
+    <div class="task" data-start="2024-05-30T08:00" data-end="2024-05-30T10:30">
+      <strong>Estrutura inicial</strong>
+      <div class="metrics"></div>
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.task').forEach(task => {
+    const start = new Date(task.dataset.start);
+    const end = new Date(task.dataset.end);
+    const diffMs = end - start;
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    task.querySelector('.metrics').textContent = `Duração: ${hours}h ${minutes}min`;
+  });
+</script>
+</body>
+</html>
